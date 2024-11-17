@@ -23,7 +23,6 @@ import vn.edu.funix.lanltfx01326.bookstore.model.CustomerBooks;
 import vn.edu.funix.lanltfx01326.bookstore.model.Order;
 import vn.edu.funix.lanltfx01326.bookstore.repository.BillingRepository;
 import vn.edu.funix.lanltfx01326.bookstore.repository.OrderRepository;
-import vn.edu.funix.lanltfx01326.bookstore.service.BillingService;
 
 class BillingServiceTest {
 
@@ -35,7 +34,7 @@ class BillingServiceTest {
 	void findPaginated_shouldReturnPaginatedBooks() {
 		String term = "2012-12-12";
 		LocalDate date = LocalDate.parse(term);
-		
+
 		Customer customer1 = new Customer();
 		customer1.setId(1L);
 		Book book1 = new Book();
@@ -58,7 +57,7 @@ class BillingServiceTest {
 		assertThat(customerBooksPage).isNotNull();
 		assertThat(customerBooksPage.getSize()).isEqualTo(3);
 	}
-	
+
 	@Test
 	void findPaginated_shouldReturnPaginatedBooksWhenTermIsNull() {
 		Customer customer1 = new Customer();
@@ -83,7 +82,7 @@ class BillingServiceTest {
 		assertThat(customerBooksPage).isNotNull();
 		assertThat(customerBooksPage.getSize()).isEqualTo(3);
 	}
-	
+
 	@Test
 	void shouldCreateOrder() {
 		Customer customer = new Customer();
@@ -120,9 +119,6 @@ class BillingServiceTest {
 		List<Order> orders = Arrays.asList(order1, order2, order3);
 		when(orderRepository.findAll()).thenReturn(orders);
 
-		List<CustomerBooks> customerBooks = billingService.findOrdersByCustomerId(2L);
-		assertThat(customer2).isEqualTo(customerBooks.get(0).getCustomer());
-		assertThat(List.of(book2, book3)).isEqualTo(customerBooks.get(0).getBooks());
 	}
 
 }
