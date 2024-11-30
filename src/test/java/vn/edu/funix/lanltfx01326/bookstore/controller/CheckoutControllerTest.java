@@ -108,6 +108,7 @@ class CheckoutControllerTest {
 		String expectedView = "/checkout";
 
 		when(shoppingCartService.getCart()).thenReturn(cart);
+		when(shoppingCartService.totalPrice()).thenReturn(new BigDecimal(0));
 
 		RedirectAttributes redirect = mock(RedirectAttributes.class);
 		BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
