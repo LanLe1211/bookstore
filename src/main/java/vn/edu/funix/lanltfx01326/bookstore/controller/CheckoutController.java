@@ -47,8 +47,12 @@ public class CheckoutController {
 	}
 
 	@PostMapping("/placeOrder")
-	public String placeOrder(@Valid Customer customer, BindingResult result, RedirectAttributes redirect) {
+	public String placeOrder(@Valid Customer customer, BindingResult result, RedirectAttributes redirect, Model model) {
 		if (result.hasErrors()) {
+			List<Book> cart = shoppingCartService.getCart();
+			model.addAttribute("productsInCart", cart);
+			model.addAttribute("totalPrice", shoppingCartService.totalPrice().toString());
+			model.addAttribute("shippingCosts", shoppingCartService.getshippingCosts());
 			return "/checkout";
 		}
 		billingService.createOrder(customer, shoppingCartService.getCart());

@@ -72,6 +72,7 @@ class CheckoutControllerTest {
 
 	@Test
 	void shouldPlaceOrder() {
+		Model model = mock(Model.class);
 		Customer customer = new Customer(1L, "Ognjen", "Andjelic", "Serbia", "NN 10", "Belgrade", "11000", "123",
 				"mail@example.com");
 		List<Book> cart = new ArrayList<>();
@@ -88,7 +89,7 @@ class CheckoutControllerTest {
 
 		RedirectAttributes redirect = mock(RedirectAttributes.class);
 		BindingResult bindingResult = new BeanPropertyBindingResult(book, "book");
-		String result = checkoutController.placeOrder(customer, bindingResult, redirect);
+		String result = checkoutController.placeOrder(customer, bindingResult, redirect, model);
 
 		assertThat(expectedView).isEqualTo(result);
 		verify(shoppingCartService, times(1)).getCart();
@@ -98,6 +99,7 @@ class CheckoutControllerTest {
 	
 	@Test
 	void shouldPlaceOrderButResultHasErrors() {
+		Model model = mock(Model.class);
 		Customer customer = new Customer();
 		List<Book> cart = new ArrayList<>();
 		Book book = new Book();
@@ -110,7 +112,7 @@ class CheckoutControllerTest {
 		RedirectAttributes redirect = mock(RedirectAttributes.class);
 		BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
 		bindingResult.addError(error);
-		String result = checkoutController.placeOrder(customer, bindingResult, redirect);
+		String result = checkoutController.placeOrder(customer, bindingResult, redirect, model);
 
 		assertThat(expectedView).isEqualTo(result);
 	}
