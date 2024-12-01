@@ -12,3 +12,4 @@ phases:
 artifacts:
   files:
     - target/bookstore.jar
+  discard-paths: yes
