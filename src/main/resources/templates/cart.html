@@ -9,70 +9,63 @@
 		<div class="row h-100">
 			<div class="col-4 no-padding">
 				<form class="form-inline" action="/checkout" method="get">
-					<button class="btn btn-primary" type="submit">
-						<i class="fa fa-cart-arrow-down fa-bigger"></i> CHECKOUT
+					<button class="btn btn-primary" type="submit" id="checkout_submit">
+						<i class="fa fa-cart-arrow-down fa-bigger"></i>
+						CHECKOUT
 					</button>
 				</form>
 			</div>
-			<div class="col-4 no-padding"
-				style="display: flex; justify-content: center;"></div>
+			<div class="col-4 no-padding" style="display: flex; justify-content: center;"></div>
 			<div class="col-4 no-padding">
-				<form class="form-inline justify-content-end" action="#"
-					th:action="@{/cart/remove/all}" method="get">
-					<button class="btn btn-danger" type="submit">
-						<i class="fa fa-trash-o fa-bigger"></i> DELETE ALL
+				<form class="form-inline justify-content-end" action="#" th:action="@{/cart/remove/all}" method="get">
+					<button class="btn btn-danger" type="submit" id="checkout_delete_all">
+						<i class="fa fa-trash-o fa-bigger"></i>
+						DELETE ALL
 					</button>
 				</form>
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div th:if="${successMessage}"
-				class="col-12 alert alert-success alert-dismissible fade show"
-				role="alert">
-				<span th:text="${successMessage}"></span>
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
+			<div th:if="${successMessage}" class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+				<span th:text="${successMessage}" id="checkout_success_message"></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" id="checkout_success_message_close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 
 			<th:block th:if="${#lists.isEmpty(cart)}">
-				<h5>Your basket is currently empty.</h5>
+				<h5 id="cart_empty_message">Your basket is currently empty.</h5>
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(cart)}">
-				<div class="card-deck"
-					style="display: flex; justify-content: space-around; margin-top: 20px;">
-					<div class="col-sm-6"
-						style="max-width: 32rem; display: inline-table; width: 32rem;"
+				<div class="card-deck" style="display: flex; justify-content: space-around; margin-top: 20px;">
+					<div class="col-sm-6" style="max-width: 32rem; display: inline-table; width: 32rem;"
 						th:each="book, iStat : ${cart}">
-						<div class="card text-white bg-dark"
-							style="width: 32rem; margin-bottom: 50px">
+						<div class="card text-white bg-dark book_container" style="width: 32rem; margin-bottom: 50px" >
 							<!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
 							<div class="card-body">
-								<h5 class="card-title" th:text="${book.name}"></h5>
-								<p class="card-text" th:text="${book.authors}"></p>
+								<h5 class="card-title book_name" th:text="${book.name}"></h5>
+								<p class="card-text book_author" th:text="${book.authors}"></p>
 							</div>
 							<div class="card-footer" style="display: inline">
-								<i class="font-weight-bold align-middle"
-									th:text="${book.price} + ' ' + '$'"></i>
-								<form class="form-inline" style="float: right" action="#"
-									th:action="@{/cart/remove/{id}(id=${book.id})}" method="get">
-									<button class="btn btn-danger" type="submit">
-										<i class="fa fa-minus-circle"></i> Remove from cart
+								<i class="font-weight-bold align-middle book_price" th:text="${book.price} + ' ' + '$'"></i>
+								<form class="form-inline" style="float: right" action="#" th:action="@{/cart/remove/{id}(id=${book.id})}"
+									method="get">
+									<button class="btn btn-danger remove_from_cart" type="submit">
+										<i class="fa fa-minus-circle"></i>
+										Remove from cart
 									</button>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div th:if="${bookPage.totalPages > 0}" class="pagination"
-					th:each="pageNumber : ${pageNumbers}">
+				<div th:if="${bookPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
-							<li class="page-item font-weight-bold"><a
-								th:href="@{/(size=${bookPage.size}, page=${pageNumber})}"
-								th:text=${pageNumber} th:class="page-link"></a></li>
+							<li class="page-item font-weight-bold">
+								<a th:href="@{/(size=${bookPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="page-link" th:id="'page-link'+${pageNumber}"></a>
+							</li>
 						</ul>
 					</nav>
 				</div>

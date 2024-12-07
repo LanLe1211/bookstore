@@ -8,36 +8,32 @@
 	<div class="container" id="main-content">
 		<div class="row">
 			<div class="col-6 no-padding">
-				<a href="#" th:href="@{/orders}" class="btn btn-info float-right">
-					<i class="fa fa-list-ul"></i> Orders
+				<a href="#" th:href="@{/orders}" class="btn btn-info float-right" id="orders_btn">
+					<i class="fa fa-list-ul"></i>
+					Orders
 				</a>
 			</div>
 			<div class="col-6 no-padding">
-				<a href="#" th:href="@{/logout}" class="btn btn-danger float-right">
-					<i class="fa fa-key"></i> Log out
+				<a href="#" th:href="@{/logout}" class="btn btn-danger float-right" id="logout_btn">
+					<i class="fa fa-key"></i>
+					Log out
 				</a>
 			</div>
 		</div>
-		<div class="card text-center text-white bg-dark"
-			style="margin-top: 25px; margin-bottom: 25px;"
+		<div class="card text-center text-white bg-dark" style="margin-top: 25px; margin-bottom: 25px;"
 			th:object="${customer}">
-			<div class="card-header" th:text="${customer?.id}"></div>
+			<div class="card-header" th:text="${customer?.id}" id="customer_id"></div>
 			<div class="card-body">
-				<h5 class="card-title"
-					th:text="|${customer?.name}   ${customer?.surname}|"></h5>
+				<h5 class="card-title" th:text="|${customer?.name}   ${customer?.surname}|" id="customer_full_name"></h5>
 				<p class="card-text"
-					th:text="|${customer?.countryRegion}, ${customer?.streetAndHouseNumber}   ${customer?.postalCode}   ${customer?.city}|"></p>
+					th:text="|${customer?.countryRegion}, ${customer?.streetAndHouseNumber}   ${customer?.postalCode}   ${customer?.city}|" id="customer_address"></p>
 			</div>
-			<div class="card-footer"
-				th:text="|${customer?.phoneNumber}, ${customer?.email}|"></div>
+			<div class="card-footer" th:text="|${customer?.phoneNumber}, ${customer?.email}|" id="customer_phone_and_email"></div>
 		</div>
 		<div class="row mt-4">
-			<div th:if="${successMessage}"
-				class="col-12 alert alert-success alert-dismissible fade show"
-				role="alert">
-				<span th:text="${successMessage}"></span>
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
+			<div th:if="${successMessage}" class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+				<span th:text="${successMessage}" id="success_message"></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" id="success_message_close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -58,26 +54,26 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="book : ${books}">
+							<tr th:each="book : ${books}" id="'book'+${book.id}">
 								<td th:text="${book.id}">
-								<td th:text="${book?.name}"></td>
-								<td th:text="${book?.price}"></td>
-								<td th:text="${book?.authors}"></td>
-								<td th:text="${book?.isbn}"></td>
-								<td th:text="${book?.publisher}"></td>
-								<td th:text="${book?.publishedOn}"></td>
+								<td th:text="${book?.name}" class="book_name"></td>
+								<td th:text="${book?.price}" class="book_price"></td>
+								<td th:text="${book?.authors}" class="book_authors"></td>
+								<td th:text="${book?.isbn}" class="book_isbn"></td>
+								<td th:text="${book?.publisher}" class="book_publisher"></td>
+								<td th:text="${book?.publishedOn}" class="book_published_date"></td>
 							</tr>
 						</tbody>
 					</table>
 					<h5>&nbsp;</h5>
 				</div>
-				<div style="margin-top: 50px;" th:if="${orderPage.totalPages > 0}"
-					class="pagination" th:each="pageNumber : ${pageNumbers}">
+				<div style="margin-top: 50px;" th:if="${orderPage.totalPages > 0}" class="pagination"
+					th:each="pageNumber : ${pageNumbers}">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
-							<li class="page-item font-weight-bold"><a
-								th:href="@{/orders(size=${orderPage.size}, page=${pageNumber})}"
-								th:text=${pageNumber} th:class="page-link"></a></li>
+							<li class="page-item font-weight-bold">
+								<a th:href="@{/orders(size=${orderPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="page-link" th:id="'page-link'+${pageNumber}"></a>
+							</li>
 						</ul>
 					</nav>
 				</div>

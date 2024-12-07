@@ -8,40 +8,38 @@
 	<div class="container" id="main-content">
 		<div class="row">
 			<div class="col-4 no-padding">
-				<form class="form-inline" action="#" th:action="@{/orders/search}"
-					method="get">
-					<input class="form-control mr-sm-2" type="search" name="term"
-						placeholder="Search by date ..." />
-					<button class="btn btn-primary" type="submit">
-						<i class="fa fa-search"></i> Search
+				<form class="form-inline" action="#" th:action="@{/orders/search}" method="get">
+					<input class="form-control mr-sm-2" type="search" name="term" placeholder="Search by date ..." id="search_input"/>
+					<button class="btn btn-primary" type="submit" id="search_btn">
+						<i class="fa fa-search"></i>
+						Search
 					</button>
 				</form>
 			</div>
 			<div class="col-4 no-padding">
-				<a href="#" th:href="@{/book}" class="btn btn-info float-right">
-					<i class="fa fa-list-ul"></i> Admin
+				<a href="#" th:href="@{/book}" class="btn btn-info float-right" id="admin_btn">
+					<i class="fa fa-list-ul"></i>
+					Admin
 				</a>
 			</div>
 			<div class="col-4 no-padding">
-				<a href="#" th:href="@{/logout}" class="btn btn-danger float-right">
-					<i class="fa fa-key"></i> Log out
+				<a href="#" th:href="@{/logout}" class="btn btn-danger float-right" id="logout_btn">
+					<i class="fa fa-key"></i>
+					Log out
 				</a>
 			</div>
 		</div>
 
 		<div class="row mt-4">
-			<div th:if="${successMessage}"
-				class="col-12 alert alert-success alert-dismissible fade show"
-				role="alert">
-				<span th:text="${successMessage}"></span>
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
+			<div th:if="${successMessage}" class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+				<span th:text="${successMessage}" id="success_message"></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" id="success_message_close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 
 			<th:block th:if="${#lists.isEmpty(orderPage.content)}">
-				<h5>There are no current orders.</h5>
+				<h5 id="no_order_message">There are no current orders.</h5>
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(orderPage.content)}">
@@ -62,30 +60,31 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="customerBooks, iStat : ${orderPage.content}">
-								<td><a href="#"
-									th:href="@{/orders/{id}(id=${customerBooks?.Customer?.id})}"
-									th:text="${customerBooks?.Customer?.id}"></a></td>
-								<td th:text="${customerBooks?.Customer?.name}"></td>
-								<td th:text="${customerBooks?.Customer?.surname}"></td>
-								<td th:text="${customerBooks?.Customer?.countryRegion}"></td>
-								<td th:text="${customerBooks?.Customer?.streetAndHouseNumber}"></td>
-								<td th:text="${customerBooks?.Customer?.city}"></td>
-								<td th:text="${customerBooks?.Customer?.postalCode}"></td>
-								<td th:text="${customerBooks?.Customer?.phoneNumber}"></td>
-								<td th:text="${customerBooks?.Customer?.email}"></td>
+							<tr th:each="customerBooks, iStat : ${orderPage.content}" th:id="'customer_book_'+${customerBooks?.Customer?.id}">
+								<td>
+									<a href="#" th:href="@{/orders/{id}(id=${customerBooks?.Customer?.id})}"
+										th:text="${customerBooks?.Customer?.id}" class="customer_id"></a>
+								</td>
+								<td th:text="${customerBooks?.Customer?.name}" class="customer_name"></td>
+								<td th:text="${customerBooks?.Customer?.surname}" class="customer_surname"></td>
+								<td th:text="${customerBooks?.Customer?.countryRegion}" class="customer_country"></td>
+								<td th:text="${customerBooks?.Customer?.streetAndHouseNumber}" class="customer_street"></td>
+								<td th:text="${customerBooks?.Customer?.city}" class="customer_city"></td>
+								<td th:text="${customerBooks?.Customer?.postalCode}" class="customer_postal_code"></td>
+								<td th:text="${customerBooks?.Customer?.phoneNumber}" class="customer_phone_number"></td>
+								<td th:text="${customerBooks?.Customer?.email}" class="customer_email"></td>
 							</tr>
 						</tbody>
 					</table>
 					<h5>&nbsp;</h5>
 				</div>
-				<div style="margin-top: 50px;" th:if="${orderPage.totalPages > 0}"
-					class="pagination" th:each="pageNumber : ${pageNumbers}">
+				<div style="margin-top: 50px;" th:if="${orderPage.totalPages > 0}" class="pagination"
+					th:each="pageNumber : ${pageNumbers}">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
-							<li class="page-item font-weight-bold"><a
-								th:href="@{/orders(size=${orderPage.size}, page=${pageNumber})}"
-								th:text=${pageNumber} th:class="page-link"></a></li>
+							<li class="page-item font-weight-bold">
+								<a th:href="@{/orders(size=${orderPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="page-link"></a>
+							</li>
 						</ul>
 					</nav>
 				</div>
