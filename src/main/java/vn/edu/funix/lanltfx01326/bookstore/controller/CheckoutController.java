@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.edu.funix.lanltfx01326.bookstore.model.Book;
 import vn.edu.funix.lanltfx01326.bookstore.model.Customer;
 import vn.edu.funix.lanltfx01326.bookstore.service.BillingService;
-import vn.edu.funix.lanltfx01326.bookstore.service.EmailService;
 import vn.edu.funix.lanltfx01326.bookstore.service.ShoppingCartService;
 
 @Controller
@@ -23,13 +22,10 @@ import vn.edu.funix.lanltfx01326.bookstore.service.ShoppingCartService;
 public class CheckoutController {
 
 	private final BillingService billingService;
-	private final EmailService emailService;
 	private final ShoppingCartService shoppingCartService;
 
-	public CheckoutController(BillingService billingService, EmailService emailService,
-			ShoppingCartService shoppingCartService) {
+	public CheckoutController(BillingService billingService, ShoppingCartService shoppingCartService) {
 		this.billingService = billingService;
-		this.emailService = emailService;
 		this.shoppingCartService = shoppingCartService;
 	}
 
@@ -56,7 +52,8 @@ public class CheckoutController {
 			return "/checkout";
 		}
 		billingService.createOrder(customer, shoppingCartService.getCart());
-		//emailService.sendEmail(customer.getEmail(), "bookstore - Order Confirmation", "Your order has been confirmed.");
+		// emailService.sendEmail(customer.getEmail(), "bookstore - Order Confirmation",
+		// "Your order has been confirmed.");
 		shoppingCartService.emptyCart();
 		redirect.addFlashAttribute("successMessage", "The order is confirmed, check your email.");
 		return "redirect:/cart";

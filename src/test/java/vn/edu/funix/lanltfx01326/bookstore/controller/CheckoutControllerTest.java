@@ -20,20 +20,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.edu.funix.lanltfx01326.bookstore.controller.CheckoutController;
 import vn.edu.funix.lanltfx01326.bookstore.model.Book;
 import vn.edu.funix.lanltfx01326.bookstore.model.Customer;
 import vn.edu.funix.lanltfx01326.bookstore.service.BillingService;
-import vn.edu.funix.lanltfx01326.bookstore.service.EmailService;
 import vn.edu.funix.lanltfx01326.bookstore.service.ShoppingCartService;
 
 class CheckoutControllerTest {
 
 	private BillingService billingService = mock(BillingService.class);
-	private EmailService emailService = mock(EmailService.class);
 	private ShoppingCartService shoppingCartService = mock(ShoppingCartService.class);
-	private CheckoutController checkoutController = new CheckoutController(billingService, emailService,
-			shoppingCartService);
+	private CheckoutController checkoutController = new CheckoutController(billingService, shoppingCartService);
 
 	@Test
 	void shouldReturnCheckout() {
@@ -83,8 +79,6 @@ class CheckoutControllerTest {
 
 		when(shoppingCartService.getCart()).thenReturn(cart);
 		doNothing().when(billingService).createOrder(customer, cart);
-		doNothing().when(emailService).sendEmail(customer.getEmail(), "bookstore - Order Confirmation",
-				"Your order has been confirmed.");
 		doNothing().when(shoppingCartService).emptyCart();
 
 		RedirectAttributes redirect = mock(RedirectAttributes.class);
@@ -96,7 +90,7 @@ class CheckoutControllerTest {
 		verify(billingService, times(1)).createOrder(customer, cart);
 		verify(shoppingCartService, times(1)).emptyCart();
 	}
-	
+
 	@Test
 	void shouldPlaceOrderButResultHasErrors() {
 		Model model = mock(Model.class);
@@ -104,7 +98,7 @@ class CheckoutControllerTest {
 		List<Book> cart = new ArrayList<>();
 		Book book = new Book();
 		cart.add(book);
-		ObjectError error = new ObjectError("customer","Customer cannot be empty.");
+		ObjectError error = new ObjectError("customer", "Customer cannot be empty.");
 		String expectedView = "/checkout";
 
 		when(shoppingCartService.getCart()).thenReturn(cart);
