@@ -74,7 +74,7 @@
 					</div>
 
 					<div class="form-group">
-						<button type="submit" class="btn btn-block btn-primary">
+						<button type="submit" class="btn btn-block btn-primary" id="place_order_submit">
 							<i class="fa fa-regular fa-cart-circle-check"></i>
 							Place order
 						</button>
@@ -86,19 +86,11 @@
 				<div class="row">
 					<div class="col">
 						<h5>Products</h5>
-						<tr th:each="book: ${productsInCart}">
-							<div>
-								<td th:text="${book.name}" />
-							</div>
-						</tr>
+							<div th:each="book: ${productsInCart}" class="cart_book_title">[(${book.name})]</div>
 					</div>
 					<div class="col">
 						<h5>In total</h5>
-						<tr th:each="book: ${productsInCart}">
-							<div>
-								<td th:text="${book.price}" />
-							</div>
-						</tr>
+							<div th:each="book: ${productsInCart}" class="cart_book_price">[(${book.price})]</div>
 					</div>
 				</div>
 				<div class="row" style="margin-top: 25px;">
@@ -106,7 +98,7 @@
 						<h5>Delivery</h5>
 					</div>
 					<div class="col">
-						<h5 th:text="|${shippingCosts} $|"></h5>
+						<h5 th:text="|${shippingCosts} $|" id="shipping_cost"></h5>
 					</div>
 				</div>
 				<div class="row" style="margin-top: 25px;">
@@ -114,19 +106,19 @@
 						<h5>In total</h5>
 					</div>
 					<div class="col">
-						<h5 th:text="|${totalPrice} $|"></h5>
+						<h5 th:text="|${totalPrice} $|" id="total_price"></h5>
 					</div>
 				</div>
 				<div class="row" style="margin-top: 25px;">
 					<div class="col">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="payment" id="radioOption1" value="card">
+							<input class="form-check-input" type="radio" name="payment" id="payment_by_card" value="card">
 							<label class="form-check-label" for="card"> Payment by card </label>
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="payment" id="radioOption2" value="cash" checked>
+							<input class="form-check-input" type="radio" name="payment" id="payment_by_cash" value="cash" checked>
 							<label class="form-check-label" for="cash"> Cash on delivery </label>
 						</div>
 					</div>
