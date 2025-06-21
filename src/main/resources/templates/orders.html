@@ -48,7 +48,7 @@
 					<table class="table table-striped table-dark text-nowrap">
 						<thead>
 							<tr>
-								<th>Customer ID</th>
+								<th>Order ID</th>
 								<th>Name</th>
 								<th>Surname</th>
 								<th>Country/Region</th>
@@ -63,7 +63,7 @@
 							<tr th:each="customerBooks, iStat : ${orderPage.content}" th:id="'customer_book_'+${customerBooks?.Customer?.id}">
 								<td>
 									<a href="#" th:href="@{/orders/{id}(id=${customerBooks?.Customer?.id})}"
-										th:text="${customerBooks?.Customer?.id}" class="customer_id"></a>
+										th:text="${customerBooks?.Customer?.id}" class="order_id"></a>
 								</td>
 								<td th:text="${customerBooks?.Customer?.name}" class="customer_name"></td>
 								<td th:text="${customerBooks?.Customer?.surname}" class="customer_surname"></td>

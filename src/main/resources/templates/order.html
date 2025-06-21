@@ -22,7 +22,7 @@
 		</div>
 		<div class="card text-center text-white bg-dark" style="margin-top: 25px; margin-bottom: 25px;"
 			th:object="${customer}">
-			<div class="card-header" th:text="${customer?.id}" id="customer_id"></div>
+			<div class="card-header" th:text="${customer?.id}" id="order_id"></div>
 			<div class="card-body">
 				<h5 class="card-title" th:text="|${customer?.name}   ${customer?.surname}|" id="customer_full_name"></h5>
 				<p class="card-text"
