@@ -47,7 +47,7 @@ public class BillingService {
 		List<CustomerBooks> list;
 
 		if (term == null) {
-			orders = (ArrayList<Order>) orderRepository.findAll();
+			orders = (ArrayList<Order>) orderRepository.findAllByOrderByIdAsc();
 		} else {
 			LocalDate date = LocalDate.parse(term);
 			orders = (ArrayList<Order>) orderRepository.findByOrderDate(date);

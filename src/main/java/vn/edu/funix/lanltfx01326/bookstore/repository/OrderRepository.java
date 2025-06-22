@@ -12,5 +12,6 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 	ArrayList<Order> findByOrderDate(LocalDate term);
 	
 	ArrayList<Order> findOrdersById(Long id);
-
+	
+	ArrayList<Order> findAllByOrderByIdAsc();
 }
