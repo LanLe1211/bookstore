@@ -49,7 +49,7 @@ class BillingServiceTest {
 
 		Pageable pageable = PageRequest.of(0, 3);
 
-		when(orderRepository.findAll()).thenReturn(orders);
+		when(orderRepository.findAllByOrderByIdAsc()).thenReturn(orders);
 
 		Page<CustomerBooks> customerBooksPage = billingService.findPaginated(pageable, term);
 
@@ -74,11 +74,11 @@ class BillingServiceTest {
 
 		Pageable pageable = PageRequest.of(0, 3);
 
-		when(orderRepository.findAll()).thenReturn(orders);
+		when(orderRepository.findAllByOrderByIdAsc()).thenReturn(orders);
 
 		Page<CustomerBooks> customerBooksPage = billingService.findPaginated(pageable, null);
 
-		verify(orderRepository).findAll();
+		verify(orderRepository).findAllByOrderByIdAsc();
 		assertThat(customerBooksPage).isNotNull();
 		assertThat(customerBooksPage.getSize()).isEqualTo(3);
 	}
