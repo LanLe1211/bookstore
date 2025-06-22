@@ -47,14 +47,10 @@ public class OrderController {
 
 	@GetMapping("/{id}")
 	public String showSpecificOrder(@PathVariable("id") Long id, Model model) {
-		List<CustomerBooks> customerBooks = billingService.findOrdersByCustomerId(id);
+		CustomerBooks customerBook = billingService.findOrdersByCustomerId(id);
 
-		Customer customer = null;
-		List<Book> books = null;
-		for (CustomerBooks c : customerBooks) {
-			customer = c.getCustomer();
-			books = c.getBooks();
-		}
+		Customer customer = customerBook.getCustomer();
+		List<Book> books = customerBook.getBooks();
 		model.addAttribute("customer", customer);
 		model.addAttribute("books", books);
 		return "order";

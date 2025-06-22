@@ -86,7 +86,7 @@ public class BillingService {
 		}
 	}
 
-	public List<CustomerBooks> findOrdersByCustomerId(Long id) {
+	public CustomerBooks findOrdersByCustomerId(Long id) {
 
 		List<Order> orders = (List<Order>) orderRepository.findAll();
 
@@ -96,9 +96,8 @@ public class BillingService {
 		List<CustomerBooks> customerBooks = customerBooksMap.entrySet().stream()
 				.map(entry -> new CustomerBooks(entry.getKey(), entry.getValue())).collect(Collectors.toList());
 
-		customerBooks.stream().filter(c -> c.getCustomer().getId().equals(id)).findAny().isPresent();
+		return customerBooks.stream().filter(c -> c.getCustomer().getId().equals(id)).findFirst().get();
 
-		return customerBooks;
 	}
 
 }

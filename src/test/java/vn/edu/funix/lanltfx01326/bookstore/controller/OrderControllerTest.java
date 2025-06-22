@@ -41,7 +41,6 @@ class OrderControllerTest {
 	@Test
 	void testShowSpecificOrder() {
 		Long id = 1L;
-		List<CustomerBooks> customerBooks = new ArrayList<>();
 		CustomerBooks cb = new CustomerBooks(null, null);
 		List<Book> books = new ArrayList<>();
 		Book book1 = new Book(1L, "The Lorde of the Rings", new BigDecimal(99.99), "J. R. R. Tolkien",
@@ -55,8 +54,7 @@ class OrderControllerTest {
 		customer.setName("John Doe");
 		cb.setCustomer(customer);
 		cb.setBooks(books);
-		customerBooks.add(cb);
-		when(billingService.findOrdersByCustomerId(id)).thenReturn(customerBooks);
+		when(billingService.findOrdersByCustomerId(id)).thenReturn(cb);
 
 		Model model = new BindingAwareModelMap();
 		String result = orderController.showSpecificOrder(id, model);
@@ -83,7 +81,7 @@ class OrderControllerTest {
 	void shouldShowSpecificOrderInvalidId() {
 		Long id = -1L;
 		List<CustomerBooks> customerBooks = new ArrayList<>();
-		when(billingService.findOrdersByCustomerId(id)).thenReturn(customerBooks);
+		when(billingService.findOrdersByCustomerId(id)).thenReturn(null);
 
 		Model model = new BindingAwareModelMap();
 
