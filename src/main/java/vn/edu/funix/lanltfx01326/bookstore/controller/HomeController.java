@@ -18,7 +18,7 @@ import vn.edu.funix.lanltfx01326.bookstore.service.BookService;
 @Controller
 public class HomeController {
 	
-	private static final int pageSizeDefault = 6;
+	private static final int pageSizeDefault = 12;
 
 	private final BookService bookService;
 

@@ -19,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 
 import vn.edu.funix.lanltfx01326.bookstore.model.Book;
 import vn.edu.funix.lanltfx01326.bookstore.repository.BookRepository;
-import vn.edu.funix.lanltfx01326.bookstore.service.BookService;
 
 class BookServiceTest {
 
