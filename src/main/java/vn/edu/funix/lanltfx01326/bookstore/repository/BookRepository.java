@@ -1,5 +1,6 @@
 package vn.edu.funix.lanltfx01326.bookstore.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,8 @@ import vn.edu.funix.lanltfx01326.bookstore.model.Book;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
+	ArrayList<Book> findAllByOrderByIdAsc();
+	
 
 	@Query(value = "SELECT * FROM books WHERE name LIKE %:term%", nativeQuery = true)
 	List<Book> findByNameContaining(@Param("term") String term);

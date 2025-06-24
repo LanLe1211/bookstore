@@ -37,7 +37,7 @@ public class BookService {
 		List<Book> list;
 
 		if (term == null) {
-			books = (ArrayList<Book>) bookRepository.findAll();
+			books = (ArrayList<Book>) bookRepository.findAllByOrderByIdAsc();
 		} else {
 			books = (ArrayList<Book>) bookRepository.findByNameContaining(term);
 		}
