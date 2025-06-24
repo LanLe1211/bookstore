@@ -1,0 +1,27 @@
+curl 'http://bookstore-uat-env.eba-26p4nuxx.us-east-2.elasticbeanstalk.com//login' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Origin: http://bookstore-uat-env.eba-26p4nuxx.us-east-2.elasticbeanstalk.com/' \
+  -H 'Referer: http://bookstore-uat-env.eba-26p4nuxx.us-east-2.elasticbeanstalk.com//login' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \
+  --data-raw 'username=admin&password=admin&%24%7B_csrf.parameterName%7D=%24%7B_csrf.token%7D' \
+  --insecure ;
+  
+  
+  curl 'http://bookstore-uat-env.eba-26p4nuxx.us-east-2.elasticbeanstalk.com//login' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -b 'JSESSIONID=E4C0F9F4AFD3393E9C9975D6974459A4' \
+  -H 'Origin: http://bookstore-uat-env.eba-26p4nuxx.us-east-2.elasticbeanstalk.com/' \
+  -H 'Referer: http://bookstore-uat-env.eba-26p4nuxx.us-east-2.elasticbeanstalk.com//login' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \
+  --data-raw 'username=admin&password=admin&%24%7B_csrf.parameterName%7D=%24%7B_csrf.token%7D' \
+  --insecure

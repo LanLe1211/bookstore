@@ -36,10 +36,10 @@ public class BookService {
 		ArrayList<Book> books;
 		List<Book> list;
 
-		if (term == null) {
-			books = (ArrayList<Book>) bookRepository.findAllByOrderByIdAsc();
+		if (term == null || term.isBlank()) {
+			books = bookRepository.findAllByOrderByIdDesc();
 		} else {
-			books = (ArrayList<Book>) bookRepository.findByNameContaining(term);
+			books = bookRepository.findByNameContaining(term);
 		}
 
 		if (books.size() < startItem) {

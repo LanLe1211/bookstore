@@ -66,11 +66,11 @@ class BookServiceTest {
 		Book book2 = new Book(ID_2, NAME_2, PRICE_2, AUTHORS_2, ISBN_2, PUBLISHER_2, DOB_2);
 		ArrayList<Book> books = new ArrayList<>(Arrays.asList(book1, book2));
 
-		when(bookRepository.findAllByOrderByIdAsc()).thenReturn(books);
+		when(bookRepository.findAllByOrderByIdDesc()).thenReturn(books);
 
 		Page<Book> bookPage = bookService.findPaginated(pageable, null);
 
-		verify(bookRepository).findAllByOrderByIdAsc();
+		verify(bookRepository).findAllByOrderByIdDesc();
 		assertThat(bookPage.getTotalElements()).isEqualTo(2);
 		assertThat(bookPage.getContent()).containsExactly(book1,book2);
 	}
